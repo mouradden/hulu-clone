@@ -1,16 +1,20 @@
 import Image from 'next/image'
 import { TbThumbUp } from "react-icons/tb";
+import {forwardRef} from "react";
 
-function Thumbnail({result})
+const Thumbnail = forwardRef(({result}, ref) =>
 {
     const Base_Url = "https://image.tmdb.org/t/p/original";
     return (
-        <div className='p-2 group cursor-pointer transition duration-200 ease-in transform sm:hover:scale-105 hover:z-50'>
+        <div 
+            ref={ref}
+            className='p-2 group cursor-pointer transition duration-200 ease-in transform sm:hover:scale-105 hover:z-50'
+        >
             <Image 
                 src={`${Base_Url}${result.backdrop_path}`}
                 width={1920}
                 height={1080}
-                alt={result.title}
+                alt={`${result.title}`}
                 />
             <div className='p-2 '>
                 <p className='truncate max-w-md'>{result.overview}</p>
@@ -25,5 +29,5 @@ function Thumbnail({result})
             </div>
         </div>
     );
-}
+})
 export default Thumbnail;
